@@ -1,19 +1,16 @@
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
-import { pokerequests } from "../lib/pokerequests";
+import { getPokemons } from "../lib/pokemons";
 import utilStyles from "../styles/utils.module.css";
 import Image from "next/image";
+import { Promise as bluebirdPromise } from "bluebird";
 
 export async function getStaticProps() {
-  const pokemonList = Array(150)
-    .fill()
-    .map(async (_, i) => {
-      const response = pokerequests(i + 1);
-      return response;
-    });
+  // iteration loop to getall 150 pokemons
 
-  const pokemons = await Promise.all(pokemonList);
+  const pokemons = await getPokemons();
+  // console.log("pokemons", pokemons);
 
   return {
     props: {
@@ -37,7 +34,7 @@ export default function Pokedex({ pokemons }) {
       </div>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <ul style={{ columns: "10" }}>
+        <ul className={utilStyles.list}>
           {pokemons.map((pokemon, i) => (
             <li className={utilStyles.listItem} key={pokemon.id}>
               <Image
@@ -47,7 +44,13 @@ export default function Pokedex({ pokemons }) {
                 height={60}
               />
               <Link href={""}>
-                <a>{pokemon.name}</a>
+                <a
+                  style={{
+                    color: "black",
+                  }}
+                >
+                  {pokemon.name}
+                </a>
               </Link>
             </li>
           ))}
