@@ -25,12 +25,9 @@ export default function Pokedex({ pokemons }) {
       <Head>
         <title>1st Generation</title>
       </Head>
-      <Link href="/">
-        <a>Home</a>
-      </Link>
+
       <div>
-        <h1>Pokedex</h1>
-        <p>1st generation Pokedex</p>
+        <h1>1st generation Pokedex</h1>
       </div>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
@@ -40,16 +37,18 @@ export default function Pokedex({ pokemons }) {
               <Image
                 src={pokemon.sprites.front_default}
                 alt={pokemon.name}
-                width={60}
-                height={60}
+                width={80}
+                height={80}
               />
               <Link href={""}>
                 <a
                   style={{
-                    color: "black",
+                    color: "white",
+                    fontSize: "16px",
+                    textShadow: "-1px 1px black",
                   }}
                 >
-                  {pokemon.name}
+                  {pokemon.name.toUpperCase()}
                 </a>
               </Link>
             </li>
