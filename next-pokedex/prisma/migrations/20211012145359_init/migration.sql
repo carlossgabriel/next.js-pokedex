@@ -1,0 +1,10 @@
+-- CreateTable
+CREATE TABLE "Pokemon" (
+    "id" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "sprite" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "Pokemon_pkey" PRIMARY KEY ("id")
+);

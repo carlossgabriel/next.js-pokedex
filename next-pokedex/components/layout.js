@@ -28,7 +28,6 @@ export default function Layout({ children, home }) {
                 <a className={utilStyles.colorInherit}>{name}</a>
               </Link>
             </h2>
-            <p className="description">A simple Pokedex build with Next.js</p>
           </>
         )}
       </header>
