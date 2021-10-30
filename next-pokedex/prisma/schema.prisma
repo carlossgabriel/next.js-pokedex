@@ -13,5 +13,5 @@ model Pokemon {
   updatedAt DateTime @default(now()) @updatedAt
   sprite    String
   name      String
-  types Json[]
+  types     Json[]
 }

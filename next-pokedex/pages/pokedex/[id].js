@@ -1,47 +1,68 @@
-import Layout from "../../components/layout";
-import { prisma, PrismaClient } from ".prisma/client";
+import Image from 'next/image';
+import PropTypes from 'prop-types';
 
-export default function Pokemon({ pokemonData }) {
-  return (
-    <Layout>
-      <div>
-        pokemon name: {pokemonData.name}
-        pokemon id: {pokemonData.id}
-        {/* pokemon sprite: {pokemonData.sprite} */}
-        pokemon type: {pokemonData.type}
-      </div>
-    </Layout>
-  );
-}
+import Layout from '../../components/layout.js';
+import { getAllPokemonsIds, getPokemonDataById } from '../../lib/pokemons.js';
+import utilStyles from '../../styles/utils.module.css';
 
-// TODO fix the dynamic routing
 export async function getStaticPaths() {
-  const prisma = new PrismaClient();
-  const paths = await prisma.pokemon.findMany({ select: { id: true } });
-  prisma.$disconnect();
-
-  const pathsArray = paths.map((path) => {
-    return {
-      id: path.id,
-    };
-  });
-  console.log("pathsArray", pathsArray);
-
+  const paths = getAllPokemonsIds();
   return {
-    paths: pathsArray,
+    paths,
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const prisma = new PrismaClient();
-  const pokemonData = await prisma.pokemon.findUnique({
-    where: { id: params.id },
-  });
-
+  const pokemonData = await getPokemonDataById(parseInt(params.id, 10));
   return {
     props: {
       pokemonData,
     },
   };
 }
+
+function Pokemon({ pokemonData }) {
+  return (
+
+    <Layout>
+      <div className={utilStyles.pokemonCard}>
+        <Image
+          src={pokemonData.sprite}
+          alt={pokemonData.name}
+          width={80}
+          height={80}
+        />
+        <div className={`${utilStyles.pokemonDescription}${utilStyles.lighText}`}>
+          <p>
+            {pokemonData.name.toUpperCase()}
+          </p>
+          <p>
+            {pokemonData.types[0].toUpperCase()}
+          </p>
+          {pokemonData.types[1] ? (
+            <p>
+              {pokemonData.types[1].toUpperCase()}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+Pokemon.propTypes = {
+  pokemonData: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    sprite: PropTypes.string.isRequired,
+    types: PropTypes.arrayOf(PropTypes.string),
+  }),
+};
+
+Pokemon.defaultProps = {
+  pokemonData: {
+    id: 1, name: '', sprite: '', types: [],
+  },
+};
+
+export default Pokemon;

@@ -1,3 +1,4 @@
+import { PrismaClient } from ".prisma/client";
 import axios from "axios";
 import { Promise as bluebirdPromise } from "bluebird";
 
@@ -16,4 +17,36 @@ export async function getPokemons() {
   const pokemons = await bluebirdPromise.all(pokemonsPromises);
 
   return pokemons;
+}
+
+export function getAllPokemonsIds() {
+  const pokemonsIds = Array(151)
+    .fill()
+    .map((_, index) => {
+      return {
+        params: {
+          id: (index + 1).toString(),
+        },
+      };
+    });
+
+  return pokemonsIds;
+}
+
+export async function getPokemonDataById(id) {
+  const prisma = new PrismaClient();
+  const pokemon = await prisma.pokemon.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      name: true,
+      sprite: true,
+      types: true,
+    },
+  });
+
+  return {
+    id,
+    ...pokemon,
+  };
 }

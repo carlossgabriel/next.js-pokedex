@@ -6,23 +6,23 @@ import utilStyles from "../styles/utils.module.css";
 
 export default function Home() {
   return (
-    <Layout>
-      <Head>
-        <title>Pokedex</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <section className={utilStyles.headingMd}>
-        <Link href="/pokedex">
-          <a>
-            <Image
-              src="/pokeball-loading.gif"
-              alt="Pokedex"
-              width={110}
-              height={110}
-            />
-          </a>
-        </Link>
-      </section>
-    </Layout>
+      <Layout>
+        <Head>
+          <title>Pokedex</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <section className={utilStyles.headingMd}>
+          <Link href="/pokedex">
+            <a>
+              <Image
+                src="/pokeball-loading.gif"
+                alt="Pokedex"
+                width={110}
+                height={110}
+              />
+            </a>
+          </Link>
+        </section>
+      </Layout>
   );
 }

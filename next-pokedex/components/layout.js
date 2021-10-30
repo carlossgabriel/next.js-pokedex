@@ -1,11 +1,11 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "./layout.module.css";
-import utilStyles from "../styles/utils.module.css";
-import Link from "next/link";
+import Head from 'next/head';
+import Link from 'next/link';
 
-const name = "Next.js Pokedex";
-export const siteTitle = "Next.js Pokedex";
+import utilStyles from '../styles/utils.module.css';
+import styles from './layout.module.css';
+
+const name = 'Next.js Pokedex';
+export const siteTitle = 'Next.js Pokedex';
 
 export default function Layout({ children, home }) {
   return (
@@ -31,7 +31,7 @@ export default function Layout({ children, home }) {
           </>
         )}
       </header>
-      <main>{children}</main>
+      <main className={utilStyles.main}>{children}</main>
       {/* {!home && (
         <div className={styles.backToHome}>
           <Link href="/">

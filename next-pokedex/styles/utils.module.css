@@ -25,6 +25,7 @@
   line-height: 1.5;
   display: flex;
   justify-content: center;
+  align-items: stretch;
 }
 
 .borderCircle {
@@ -41,8 +42,6 @@
 
 .list {
   list-style: none;
-  padding: 0;
-  margin: 0;
   grid-auto-columns: auto;
   width: 100%;
   display: grid;
@@ -60,6 +59,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: none;
 }
 
 .lightText {
@@ -69,4 +69,30 @@
 .p {
   margin: 0;
   font-size: small;
+}
+
+.pokemonCard {
+  background-color: rgba(252, 252, 252, 0.404);
+  border-radius: 8px 16px 8px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border: none;
+  width: 80%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemonDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
 }
